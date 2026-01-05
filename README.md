@@ -18,8 +18,6 @@ All computational results are intended to **support, not replace**, traditional 
 
 We have performed a detailed analysis on a 19th-century Vietnamese Yao (Lanten / Kim Mun) religious manuscript: *Zhai duan (Wang) miyu* (齋短（亡）秘語).
 
-*  **[Full Case Study Report](./examples/mini_case_study.md)**: Click here to view the interpretive summary connecting computational results with codicological observations.
-* **[Core Analysis Script](./scripts/anomaly_scan_vheat.py)**: Click here to view the Python engine used for this research.
 
 ### Representative Figures
 
