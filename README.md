@@ -26,23 +26,6 @@ We have performed a detailed analysis on a 19th-century Vietnamese Yao (Lanten /
 
 ---
 
-## Repository Structure
-
-```text
-vheat-codicology/
-├── README.md           # Project documentation
-├── scripts/            
-│   └── anomaly_scan_vheat.py  # Main batch processing engine
-├── examples/           
-│   ├── figures/        # Visualization outputs (2D/3D plots)
-│   └── mini_case_study.md # Detailed experimental report
-├── requirements.txt    # Dependency list
-├── LICENSE             # License info
-└── .gitignore
-
-```
-
----
 
 ## Quick Start
 
