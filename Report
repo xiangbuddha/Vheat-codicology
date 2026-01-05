@@ -9,52 +9,31 @@ This study investigates the materiality of 19th-century Vietnamese Yao (Lanten) 
 ---
 
 ## 1. Introduction: The Materiality of Yao Manuscripts
-Within the religious networks of the East and Southeast Asian highlands, the manuscripts of the **Indigo Yao (Kim Mun / Lanten)** function as more than doctrinal carriers; they are the material foundation of a mobile transregional network. 
-
-As noted by Jacob Cawthorne, these texts represent an **"active literacy"**, where manuscripts are continually copied, carried, and reinterpreted during ritual practice and migration. Consequently, physical traces like paper wear and stains are historical evidence of equal importance to the written content.
+The manuscripts of the **Indigo Yao (Kim Mun / Lanten)** function as the material foundation of a mobile transregional network. As noted by Jacob Cawthorne, these texts represent an **"active literacy"**, where manuscripts are continually copied, carried, and reinterpreted during ritual practice and migration.
 
 ---
 
 ## 2. Methodology: vHeat as a Codicological Tool
-We introduce **vHeat** (accepted at CVPR 2025) as a low-cost, high-throughput approach to computational codicology.
+We introduce **vHeat** (accepted at CVPR 2025) as a low-cost, high-throughput approach to computational codicology. 
 
 ### The Physical Metaphor
-The design of vHeat is inspired by principles of heat conduction. In a codicological context, this offers strong interpretive potential:
-* **Ink Penetration**: The diffusion of heat through a medium shares mathematical similarities with the capillary penetration of ink into porous paper.
-* **Aging Stains**: The model approximates the spread of mold and the formation of aging stains by modeling pixels as sources of diffusion.
-* **Efficiency**: It achieves a global receptive field while maintaining computational efficiency, approximating natural interactions on a planar surface.
-
-### Quantitative Metrics
-The study employs three key metrics across all ninety-four pages:
-1. **Mean Anomaly Index**: Overall intensity of material deviation.
-2. **Anomaly Area Percentage**: Total surface area affected by significant anomalies.
-3. **Pattern Complexity**: Statistical variation (Standard Deviation) of the heatmap, reflecting texture regularity.
+The design of vHeat is inspired by heat conduction:
+* **Ink Penetration**: Similar to heat diffusion through a medium.
+* **Aging Stains**: Modeled as diffusion sources from pixels.
+* **Efficiency**: Achieves a global receptive field for planar surfaces.
 
 ---
 
 ## 3. Case Study Analysis: Zhai duan (Wang) miyu
 
-### A. Macro-level Distribution (The U-Shaped Pattern)
-At the scale of the entire volume, the distribution of anomaly area percentages displays a pronounced **U-shaped pattern**. 
-* **Opening and Closing Leaves**: Exhibit the highest anomaly percentages due to handling and humidity exposure.
-* **Inner Pages**: Pages 36, 30, and 24 exhibit high Mean Anomaly Index values but low Area Percentages (< 2%), confirming the manuscript’s overall loose paper fiber structure.
+### A. Macro-level Distribution
+* **U-Shaped Pattern**: Anomaly area percentages are highest at the opening and closing leaves due to handling and humidity.
+* **Fiber Structure**: Inner pages (e.g., Pages 36, 30, 24) show high anomaly intensity but low area (< 2%), confirming a loose paper fiber structure.
 
-### B. Intentional Layout vs. Degradation (Page 19)
-Page 19 presented a methodologically significant profile: the highest **Pattern Complexity** in the manuscript but a low Anomaly Area Percentage. 
-* **Findings**: The heat distribution followed a highly regular frequency structure.
-* **Interpretation**: Reference to the original image revealed dense tabular lines and talismanic grid structures, indicating that the model captures **deliberate layout design** rather than damage.
-
-### C. Stroke Edge and Ritual Use
-* **Stroke Sharpness**: Page 36 preserves sharper stroke edges (higher Pattern Complexity) compared to the homogenized background of Page 30.
-* **Ritual Handling**: Page 8 exhibits a distinctly uneven anomaly distribution, likely associated with grease stains or smudges left by repeated handling during ritual performance.
+### B. Intentional Layout vs. Degradation
+* **Page 19**: Showed the highest **Pattern Complexity**. The heat distribution followed a regular frequency structure, indicating **deliberate layout design (talismanic grids)** rather than damage.
 
 ---
 
 ## 4. Conclusion
-vHeat provides an accessible computational pathway for the material study of premodern books, running efficiently on a **single consumer-grade GPU**. While it lowers the threshold for computational codicology, results must always be interpreted in conjunction with specific codicological knowledge and material context.
-
----
-
-## Bibliography
-* **Cawthorne, Jacob.** *Letters without Capitals: Text and Practice in Kim Mun (Yao) Culture.* BRILL, 2020.
-* **Wang, Zhaozhi, et al.** "Building Vision Models upon Heat Conduction." *Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)*, 2025.
+vHeat provides an accessible pathway for material study on a **single consumer-grade GPU**. Results must be interpreted in conjunction with specific codicological knowledge.
