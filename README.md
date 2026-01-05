@@ -1,8 +1,3 @@
-# vHeat-Codicology  
-**Computational Codicology via Thermal Diffusion** *Visualizing Material Anomalies in Manuscripts*
-
----
-
 ## Overview
 
 This repository provides a reproducible analysis pipeline, example visualizations, and a short case study for the project:  
@@ -18,14 +13,16 @@ All computational results are intended to **support, not replace**, traditional 
 
 We have performed a detailed analysis on a 19th-century Vietnamese Yao (Lanten / Kim Mun) religious manuscript: *Zhai duan (Wang) miyu* (齋短（亡）秘語).
 
+*  **[Full Case Study Report](./examples/mini_case_study.md)**: Click here to view the interpretive summary connecting computational results with codicological observations.
+*  **[Core Analysis Script](./scripts/anomaly_scan_vheat.py)**: Click here to view the Python engine used for this research.
 
 ### Representative Figures
 
 > **Note:** The figures below demonstrate the model's ability to map physical degradation and ink penetration.
 
-**Case example: 2D overlay (Heatmap + Contours)** ![2D overlay example](examples/figures/003_overlay.png)
+**Case example: 2D overlay (Heatmap + Contours)** 
 
-**Case example: 3D surface plot (Z-Score Landscape)** ![3D surface example](examples/figures/example_3d_surface.png)
+**Case example: 3D surface plot (Z-Score Landscape)** 
 
 ---
 
