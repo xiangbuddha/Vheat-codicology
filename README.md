@@ -16,7 +16,7 @@ All computational results are intended to **support, not replace**, traditional 
 
 ---
 
-## Research Context
+## Case Studies
 
 Premodern religious manuscripts preserve rich material traces resulting from copying practices, ritual handling, environmental exposure, and long-term use. While physicochemical approaches such as multispectral imaging offer powerful tools for material analysis, their cost and technical requirements limit large-scale or field-based application.
 
