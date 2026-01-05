@@ -1,1 +1,98 @@
+# Computational Codicology via Thermal Diffusion
+## Visualizing Material Anomalies in Lanten Religious Manuscripts
+
+---
+
+## Background
+
+Within the religious networks of the East and Southeast Asian highlands, the religious manuscripts of the Indigo Yao (Kim Mun / Lanten) function not only as carriers of doctrinal and ritual knowledge, but also as the material foundation of a cultural network that transcends the boundaries of modern nation-states. As Jacob Cawthorne has noted, such textual practices gave rise to an “active literacy” distributed across the frontier highlands of southern China, northern Vietnam, and northwestern Laos.
+
+This form of literacy is not characterized by the static transmission of a fixed canon, but rather by a dynamic textual life cycle in which manuscripts are continually copied, carried, and reinterpreted in the course of migration, ritual practice, and everyday use. Its historical roots can be traced to a manuscript culture shaped by Daoist textual and ritual traditions since the Tang and Song periods. In the context of sustained Indigo Yao migrations from the late nineteenth to the early twentieth century, this tradition developed into a highly mobile, transregional textual network.
+
+Consequently, the material features of Yao religious manuscripts, including paper wear, ink bleed-through, and stains left by repeated handling, are not ancillary to textual meaning, but constitute historical evidence of equal importance to the written content itself.
+
+---
+
+## Research Problem
+
+Despite this, existing digital humanities research on religious manuscripts has largely focused on transcription, annotation, and semantic analysis, while paying relatively little attention to traces of use and material pathology. Although physicochemical methods such as multispectral imaging have been widely adopted in the study of premodern books, their high equipment costs and technical demands make them difficult to apply at scale to large corpora of vernacular manuscripts or field-collected materials with uneven preservation conditions.
+
+This situation raises a key methodological question: how can the materiality of religious manuscripts be studied systematically through approaches that are both lower in cost and higher in throughput?
+
+---
+
+## Case Study and Method
+
+Against this background, the present study takes a 19th century Vietnamese Yao religious manuscript, *Zhai duan (Wang) miyu* 齋短（亡）秘語, as its case study and introduces the unsupervised computer vision model **vHeat** as a low-cost, high-throughput approach to computational codicology.
+
+The aim is to employ unsupervised visual analysis to transform material traces that are difficult to compare systematically by eye into data that are quantifiable and visualizable, thereby providing new forms of evidence for understanding manuscript production techniques, patterns of use, and ritual practice.
+
+vHeat is a visual backbone network accepted at CVPR 2025, and its design is inspired by principles of heat conduction. In a codicological context, this physical metaphor offers strong interpretive potential, since the diffusion of heat through a medium shares clear mathematical similarities with the capillary penetration of ink into porous paper, the spread of mold, and the formation of aging stains.
+
+By treating pixels or local image regions as sources of diffusion and modeling their correlations accordingly, vHeat achieves a global receptive field while maintaining computational efficiency, thus approximating the natural interactions of material processes on a planar surface.
+
+---
+
+## Technical Framework
+
+From a technical perspective, vHeat employs a frequency-domain mapping based on the Discrete Cosine Transform, which makes the model highly sensitive to texture density, edge gradients, and high-frequency noise. Learnable parameters are used to regulate the range of diffusion, thereby simulating, at a numerical level, the temporal scale or conductivity terms in the heat conduction equation.
+
+For each page of *Zhai duan (Wang) miyu*, the study generates two types of visual output:
+
+- Two-dimensional feature heatmap overlays  
+- Three-dimensional anomaly terrain maps  
+
+The former enables precise localization of anomalous regions, while the latter translates material variation into visually perceptible height fluctuations.
+
+---
+
+## Quantitative Analysis
+
+Building on these outputs, the study employs three metrics:
+
+- **Mean Anomaly Index**
+- **Anomaly Area Percentage**
+- **Pattern Complexity**
+
+These metrics are used to conduct macro-level statistical and comparative analysis across all ninety-four pages of the manuscript.
+
+The results show that many inner pages, including pages 36, 30, and 24, consistently exhibit relatively high Mean Anomaly Index values while maintaining Anomaly Area Percentages below 2 percent. This pattern quantitatively confirms the manuscript’s overall material characteristics of loose paper fiber structure and high ink permeability.
+
+At the scale of the entire volume, the distribution of anomaly area percentages displays a pronounced U-shaped pattern. The cover page exhibits the highest anomaly area percentage, followed by several pages near the end of the manuscript, while the middle sections remain comparatively stable. This distribution closely corresponds to long-standing observations in book history regarding the concentration of handling, humidity exposure, and wear on the opening and closing leaves.
+
+---
+
+## Interpretation
+
+Comparative analysis across individual pages further demonstrates that detected anomalies do not necessarily indicate physical damage. Page 19 presents a methodologically significant anomaly profile, with the highest Pattern Complexity value in the manuscript but a relatively low Anomaly Area Percentage.
+
+Examination of the three-dimensional terrain map shows that the heat distribution on this page follows a highly regular frequency structure rather than random, dispersed peaks. Reference to the original image reveals dense tabular lines and talismanic grid structures, indicating that the detected anomalies result from deliberate layout design rather than deterioration.
+
+This finding demonstrates that vHeat is capable of capturing the regular textures produced by intentional writing and layout practices, and it suggests a new feature dimension for the future identification of non-textual elements in premodern books.
+
+---
+
+## Ink Properties and Ritual Use
+
+The model also reveals subtle differences in the physical properties of ink across pages. Pages 36 and 30 are both densely written on both sides and display similar Mean Anomaly Index values, yet page 36 shows a markedly higher Pattern Complexity.
+
+The three-dimensional terrain maps indicate that page 36 preserves sharper stroke edges, producing stronger frequency-domain interference, whereas the background intensity of page 30 appears more homogenized. These differences may reflect variations in ink concentration, brush movement, or the degree of paper aging.
+
+At the level of ritual use, page 8 exhibits a distinctly uneven anomaly distribution, with highlighted regions that are likely associated with grease stains or smudges left by repeated handling during ritual performance.
+
+---
+
+## Conclusion and Limitations
+
+Overall, this study demonstrates that vHeat provides an accessible computational pathway for the material study of premodern books and religious manuscripts. The model runs efficiently on a single consumer-grade GPU and significantly lowers both computational and equipment thresholds, enabling computational codicology to extend beyond a small number of well-funded laboratory environments.
+
+At the same time, the approach has clear limitations. In cases involving material heterogeneity caused by paper repairs or re-mounting, which are common in late Qing manuscripts, the model may produce misinterpretations. For this reason, computational results must always be interpreted in conjunction with the specific material context and codicological knowledge of the manuscript, rather than being treated as self-sufficient evidence independent of the object itself.
+
+---
+
+## Bibliography
+
+- Cawthorne, Jacob. *Letters without Capitals: Text and Practice in Kim Mun (Yao) Culture*. BRILL, 2020.
+- Wang, Zhaozhi, Yue Liu, Yunfan Liu, Hongtian Yu, Yaowei Wang, Qixiang Ye, and Yunjie Tian. “Building Vision Models upon Heat Conduction.” *ArXiv* (Cornell University), May 26, 2024. https://doi.org/10.48550/arxiv.2405.16555
+
 
