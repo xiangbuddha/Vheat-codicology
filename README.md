@@ -1,6 +1,6 @@
 # vHeat-Codicology  
 **Computational Codicology via Thermal Diffusion**  
-*Visualizing Material Anomalies in Lanten Religious Manuscripts*
+*Visualizing Material Anomalies Manuscripts*
 
 ---
 
