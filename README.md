@@ -1,6 +1,6 @@
 # vHeat-Codicology  
 **Computational Codicology via Thermal Diffusion**  
-*Visualizing Material Anomalies Manuscripts*
+*Visualizing Material Anomalies in Manuscripts*
 
 ---
 
@@ -25,29 +25,46 @@ This project investigates a lower-cost, high-throughput alternative by adapting 
 The case study focuses on a 19th-century Vietnamese Yao (Lanten / Kim Mun) religious manuscript,  
 *Zhai duan (Wang) miyu* (齋短（亡）秘語), analyzed across its digitized pages.
 
+### Experimental Report (Exploratory)
+
+> **Chinese report (as-is, exploratory draft):**  
+> 我尝试将其应用到对越南北部蓝靛瑶人宗教写本的物质状态分析上，以《斋短秘语》为例，考察其中的磨损、墨迹、缺失等异常现象。当然，本次分析只是一次粗略的试验，更接近于数据驱动的探索性报告，也可以看作未来研究方向的框架。这项基于 vHeat 的分析尝试，基本可以视作 Computational Codicology 与 Distant Viewing 方法的结合。由于 vHeat 的 DCT 模型对纹理密度、边缘梯度与高频噪声极为敏感，它能够在无需监督的情况下，通过“平均异常指数”（Mean Anomaly Index）与“异常面积占比”（Anomaly Area Percentage）这两个指标，把原本静态的写本图像转化为可量化的病理结构图谱，用以揭示纸张纤维、墨迹、霉斑、破损等物理因素。为了把模型对古籍物质形态的判断转换成更容易被人理解的视觉形式，vHeat 为每一页写本生成了两种具有不同作用的图像：二维特征热力叠加图（2D overlay map）和三维异常地形图（3D surface plot）。二维叠加图可以看作古籍损害的定位图。模型使用 Jet 色阶把特征激活值覆盖在原始图像上，深蓝色表示较为平静的区域（例如空白背景），红色表示纹理密集或存在破损的区域。图中最重要的标记是绿色的闭合轮廓线。它们不是简单的可视化效果，而是依据统计阈值（Z-score 大于 1.3 且绝对强度大于 0.45）自动划定的显著性边界，用来标识排除自然泛黄、轻度透墨等背景因素后，模型认为具有结构性异常的位置。比如在封面页中，红色区域明显且被绿色线条圈定，说明那里很可能存在破洞、污渍等实质性的损害。相反，某些内页虽然整体呈现红色（说明字迹密集、纹理显著），但几乎没有绿色轮廓，这意味着虽然有透墨或高密度书写，但并无物理破坏。简单说，红色显示纹理的强弱，绿色线条则指向真正的损伤。与二维图相对应的三维地形图更像是古籍纹理的深度扫描。它把热力值映射到三维空间的高度，形成一种类似地貌的结构：平整的区域对应纸张的正常背景，起伏的丘陵代表密集的书写，而突然拔高的尖峰通常与霉斑、虫洞或印章边缘等剧烈变化有关。通过旋转观察三维图，可以很清楚地区分不同类型的异常。例如，透墨在三维图上往往呈现均匀、低矮而密集的波动，看上去像一片细碎的草地；相比之下，霉斑或污渍会形成中心高、边缘陡的孤立峰值。这种从二维到三维的转化，让许多肉眼难以辨识的细节以更直观的方式呈现出来，也使我们能够从频率和强度两个维度重新理解写本的物质状态。
+
+### Representative Figures
+
+> **Important:** GitHub cannot display images from your local drive (e.g., `D:\...`).  
+> Please copy your generated figures into the repository, for example:
+> - from `D:\models\vHeat\vheat_out_batch\2D_Overlays\003_overlay_base.png`
+> - to `examples/figures/003_overlay.png`
+
+**Case example: 2D overlay (heat + contours)**  
+![2D overlay example](examples/figures/003_overlay.png)
+
+**Case example: 3D surface plot (z-score landscape)**  
+![3D surface example](examples/figures/example_3d_surface.png)
+
+*(Replace `example_3d_surface.png` with your actual exported 3D figure filename.)*
+
 ---
 
 ## Repository Structure
 
 vheat-codicology/
-├── README.md
-├── scripts/
-│ └── vheat_anomaly_batch.py
-├── examples/
-│ ├── figures/
-│ │ ├── example_overlay.png
-│ │ ├── example_3d_surface.png
-│ │ └── anomaly_distribution_curve.png
-│ └── mini_case_study.md
-├── requirements.txt
-├── LICENSE
-└── .gitignore
-
-yaml
-Copy code
+├── README.md  
+├── scripts/  
+│   └── anomaly_scan_vheat.py  
+├── examples/  
+│   ├── figures/  
+│   │   ├── 003_overlay.png  
+│   │   ├── example_3d_surface.png  
+│   │   └── anomaly_distribution_curve.png  
+│   └── mini_case_study.md  
+├── requirements.txt  
+├── LICENSE  
+└── .gitignore  
 
 - **scripts/**  
-  Analysis scripts for batch processing manuscript page images.
+  Batch processing scripts for manuscript page images.
 
 - **examples/figures/**  
   Selected visualization outputs (2D overlays, 3D surfaces, distribution plots).
@@ -93,51 +110,57 @@ https://github.com/MzeroMiko/vHeat
 This repository does not redistribute the vHeat source code or pretrained weights. Users should obtain them from the original repository.
 
 Quick Start
-1. Clone this repository
+1) Clone this repository
 bash
 Copy code
 git clone https://github.com/your-username/vheat-codicology.git
 cd vheat-codicology
-2. Prepare environment
+2) Prepare environment
 bash
 Copy code
 pip install -r requirements.txt
-3. Obtain vHeat and weights
-Clone the original vHeat repository:
-https://github.com/MzeroMiko/vHeat
+3) Obtain vHeat and weights
+Clone the original vHeat repository: https://github.com/MzeroMiko/vHeat
 
-Download the pretrained weight file (e.g. vHeat_base.pth) as instructed in the original repository.
+Download the pretrained weight file (e.g., vHeat_base.pth) as instructed in the original repository.
 
-4. Run batch analysis
+4) Run batch analysis (clean CLI script)
+This repo provides a clean, parameterized script:
+
+Input: a folder of manuscript page images
+
+Output: 2D overlays, 3D surfaces, and a ranked summary report
+
 bash
 Copy code
-python scripts/vheat_anomaly_batch.py \
-  --vheat_root /path/to/vHeat \
-  --weights /path/to/vHeat_base.pth \
-  --input_dir /path/to/manuscript_pages \
-  --output_dir outputs
-5. Outputs
+python scripts/anomaly_scan_vheat.py \
+  --input_dir "/path/to/manuscript_pages" \
+  --output_dir "outputs" \
+  --vheat_repo "/path/to/vHeat" \
+  --weights "/path/to/vHeat_base.pth" \
+  --z_thr 1.3 \
+  --int_thr 0.45 \
+  --top_n 30
+5) Outputs
 The script generates:
 
-2D heatmap overlays for each page
+outputs/2D_Overlays/ — 2D heatmap overlays (+ contour outlines)
 
-3D anomaly surface plots
+outputs/3D_Surface_Plots/ — 3D anomaly surface plots (z-score landscape)
 
-A text-based summary report ranking pages by anomaly metrics
+outputs/Analysis_Reports/summary_report.txt — ranked summary report
 
-Sorted visualization outputs for comparative inspection
+outputs/Sorted_Mean_Anomaly_High_to_Low/ — overlays sorted by mean anomaly
 
 Case Study and Figures
 A short case study summarizing the experimental results and their codicological interpretation is provided in:
 
-bash
-Copy code
 examples/mini_case_study.md
+
 Representative figures are stored in:
 
-bash
-Copy code
 examples/figures/
+
 These materials illustrate how page-level anomaly distributions correspond to established observations regarding manuscript wear, handling intensity, and material stress.
 
 Data and Images
