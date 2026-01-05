@@ -1,13 +1,11 @@
 # vHeat-Codicology  
-**Computational Codicology via Thermal Diffusion**  
-*Visualizing Material Anomalies in Manuscripts*
+**Computational Codicology via Thermal Diffusion** *Visualizing Material Anomalies in Manuscripts*
 
 ---
 
 ## Overview
 
-This repository provides a reproducible analysis pipeline, example visualizations, and a short case study for the project:
-
+This repository provides a reproducible analysis pipeline, example visualizations, and a short case study for the project:  
 **Computational Codicology via Thermal Diffusion: Visualizing Material Anomalies in Lanten Religious Manuscripts**
 
 The project explores how heat-conduction–inspired vision models can be adapted for the study of manuscript materiality. By applying the **vHeat** visual backbone to historical document images, the workflow visualizes and quantifies page-level material anomalies such as ink diffusion, wear patterns, stains, and layout-induced texture variation.
@@ -16,71 +14,81 @@ All computational results are intended to **support, not replace**, traditional 
 
 ---
 
-## Case Studies
+## Case Studies & Reports
 
-Premodern religious manuscripts preserve rich material traces resulting from copying practices, ritual handling, environmental exposure, and long-term use. While physicochemical approaches such as multispectral imaging offer powerful tools for material analysis, their cost and technical requirements limit large-scale or field-based application.
+We have performed a detailed analysis on a 19th-century Vietnamese Yao (Lanten / Kim Mun) religious manuscript: *Zhai duan (Wang) miyu* (齋短（亡）秘語).
 
-This project investigates a lower-cost, high-throughput alternative by adapting **vHeat**, a heat-conduction–based visual backbone model, to manuscript page analysis. The thermal diffusion metaphor is particularly suitable for codicological contexts, as it parallels material processes such as ink penetration into porous paper, fiber diffusion, mold spread, and aging-related stains.
-
-The case study focuses on a 19th-century Vietnamese Yao (Lanten / Kim Mun) religious manuscript,  
-*Zhai duan (Wang) miyu* (齋短（亡）秘語), analyzed across its digitized pages.
-
-### Experimental Report (Exploratory)
-
+*  **[Full Case Study Report](./examples/mini_case_study.md)**: Click here to view the interpretive summary connecting computational results with codicological observations.
+* **[Core Analysis Script](./scripts/anomaly_scan_vheat.py)**: Click here to view the Python engine used for this research.
 
 ### Representative Figures
 
-> **Important:** GitHub cannot display images from your local drive (e.g., `D:\...`).  
-> Please copy your generated figures into the repository, for example:
-> - from `D:\models\vHeat\vheat_out_batch\2D_Overlays\003_overlay_base.png`
-> - to `examples/figures/003_overlay.png`
+> **Note:** The figures below demonstrate the model's ability to map physical degradation and ink penetration.
 
-**Case example: 2D overlay (heat + contours)**  
-![2D overlay example](examples/figures/003_overlay.png)
+**Case example: 2D overlay (Heatmap + Contours)** ![2D overlay example](examples/figures/003_overlay.png)
 
-**Case example: 3D surface plot (z-score landscape)**  
-![3D surface example](examples/figures/example_3d_surface.png)
-
-*(Replace `example_3d_surface.png` with your actual exported 3D figure filename.)*
+**Case example: 3D surface plot (Z-Score Landscape)** ![3D surface example](examples/figures/example_3d_surface.png)
 
 ---
 
 ## Repository Structure
 
+```text
 vheat-codicology/
-├── README.md  
-├── scripts/  
-│   └── anomaly_scan_vheat.py  
-├── examples/  
-│   ├── figures/  
-│   │   ├── 003_overlay.png  
-│   │   ├── example_3d_surface.png  
-│   │   └── anomaly_distribution_curve.png  
-│   └── mini_case_study.md  
-├── requirements.txt  
-├── LICENSE  
-└── .gitignore  
+├── README.md           # Project documentation
+├── scripts/            
+│   └── anomaly_scan_vheat.py  # Main batch processing engine
+├── examples/           
+│   ├── figures/        # Visualization outputs (2D/3D plots)
+│   └── mini_case_study.md # Detailed experimental report
+├── requirements.txt    # Dependency list
+├── LICENSE             # License info
+└── .gitignore
 
-- **scripts/**  
-  Batch processing scripts for manuscript page images.
+```
 
-- **examples/figures/**  
-  Selected visualization outputs (2D overlays, 3D surfaces, distribution plots).
+---
 
-- **examples/mini_case_study.md**  
-  A short interpretive summary connecting computational results with codicological observations.
+## Quick Start
+
+### 1. Environment Setup
+
+```bash
+git clone [https://github.com/your-username/vheat-codicology.git](https://github.com/your-username/vheat-codicology.git)
+cd vheat-codicology
+pip install -r requirements.txt
+
+```
+
+### 2. Dependencies
+
+1. Clone the original [vHeat Repository](https://github.com/MzeroMiko/vHeat).
+2. Download the pretrained weights (e.g., `vHeat_base.pth`).
+
+### 3. Run the Research Script
+
+You can use the provided script to replicate our results. It performs feature extraction, **Z-score outlier detection**, and automated anomaly ranking.
+
+```bash
+python scripts/anomaly_scan_vheat.py \
+  --input_dir "./your_manuscript_images" \
+  --output_dir "./research_outputs" \
+  --vheat_repo "/path/to/vHeat_source" \
+  --weights "/path/to/vHeat_base.pth" \
+  --z_thr 1.3 \
+  --int_thr 0.45
+
+```
 
 ---
 
 ## Methodological Orientation
 
-This project treats computational methods as **analytical aids**, not autonomous interpretive agents. Visual outputs generated by the model are designed to:
+This project treats computational methods as **analytical aids**. The thermal diffusion metaphor of the vHeat model is particularly suitable for codicology, as it parallels material processes such as:
 
-- Identify regions of interest for closer codicological inspection  
-- Support comparative analysis across large sets of manuscript pages  
-- Quantify material variation in dialogue with historical and material knowledge  
-
-Detected anomalies do **not** automatically indicate damage. Regular layouts, dense ruling, talismanic grids, or intentional graphic structures may also produce strong responses and must be interpreted contextually.
+* **Ink Penetration**: How ink interacts with porous paper fibers over centuries.
+* **Material Stress**: Identifying patterns of mold, stains, or heavy ritual handling.
+* **Statistical Outliers**: Using Z-Scores to separate intentional writing from accidental material damage.
 
 ---
 
@@ -88,83 +96,41 @@ Detected anomalies do **not** automatically indicate damage. Regular layouts, de
 
 This project builds upon the **vHeat** visual backbone model proposed in:
 
-> Wang, Zhaozhi, Yue Liu, Yunjie Tian, Yunfan Liu, Yaowei Wang, and Qixiang Ye.  
-> *Building Vision Models upon Heat Conduction.*  
-> Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2025, pp. 9707–9717.
+> Wang, Zhaozhi, Yue Liu, Yunjie Tian, Yunfan Liu, Yaowei Wang, and Qixiang Ye.
+> *Building Vision Models upon Heat Conduction.* > Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2025.
 
-BibTeX citation:
 ```bibtex
 @InProceedings{Wang_2025_CVPR,
     author    = {Wang, Zhaozhi and Liu, Yue and Tian, Yunjie and Liu, Yunfan and Wang, Yaowei and Ye, Qixiang},
     title     = {Building Vision Models upon Heat Conduction},
     booktitle = {Proceedings of the Computer Vision and Pattern Recognition Conference (CVPR)},
-    month     = {June},
-    year      = {2025},
-    pages     = {9707-9717}
+    year      = {2025}
 }
-Original vHeat repository:
-https://github.com/MzeroMiko/vHeat
 
-This repository does not redistribute the vHeat source code or pretrained weights. Users should obtain them from the original repository.
+```
 
-Quick Start
-1) Clone this repository
-bash
-Copy code
-git clone https://github.com/your-username/vheat-codicology.git
-cd vheat-codicology
-2) Prepare environment
-bash
-Copy code
-pip install -r requirements.txt
-3) Obtain vHeat and weights
-Clone the original vHeat repository: https://github.com/MzeroMiko/vHeat
+---
 
-Download the pretrained weight file (e.g., vHeat_base.pth) as instructed in the original repository.
+## Citation
 
-4) Run batch analysis (clean CLI script)
-This repo provides a clean, parameterized script:
-
-Input: a folder of manuscript page images
-
-Output: 2D overlays, 3D surfaces, and a ranked summary report
-
-bash
-Copy code
-python scripts/anomaly_scan_vheat.py \
-  --input_dir "/path/to/manuscript_pages" \
-  --output_dir "outputs" \
-  --vheat_repo "/path/to/vHeat" \
-  --weights "/path/to/vHeat_base.pth" \
-  --z_thr 1.3 \
-  --int_thr 0.45 \
-  --top_n 30
-5) Outputs
-The script generates:
-
-outputs/2D_Overlays/ — 2D heatmap overlays (+ contour outlines)
-
-outputs/3D_Surface_Plots/ — 3D anomaly surface plots (z-score landscape)
-
-outputs/Analysis_Reports/summary_report.txt — ranked summary report
-
-outputs/Sorted_Mean_Anomaly_High_to_Low/ — overlays sorted by mean anomaly
-
-Case Study and Figures
-A short case study summarizing the experimental results and their codicological interpretation is provided in:
-
-examples/mini_case_study.md
-
-Representative figures are stored in:
-
-examples/figures/
-
-These materials illustrate how page-level anomaly distributions correspond to established observations regarding manuscript wear, handling intensity, and material stress.
-
-Data and Images
-The manuscript page images and derived visualizations included in this repository are shared for academic research and demonstration purposes only. They are not intended to substitute for direct examination of the physical manuscript.
-
-Citation
 If you use or reference this project, please cite:
+**Wei, Xiang. Computational Codicology via Thermal Diffusion: Visualizing Material Anomalies in Lanten Religious Manuscripts. GitHub repository, vHeat-Codicology.**
 
-Wei, Xiang. Computational Codicology via Thermal Diffusion: Visualizing Material Anomalies in Lanten Religious Manuscripts. GitHub repository, vHeat-Codicology.
+```
+
+### Final Checklist for GitHub:
+1.  **`scripts/`**: Put the Python script I wrote for you earlier into this folder and name it `anomaly_scan_vheat.py`.
+2.  **`examples/figures/`**: Make sure your `.png` files are placed here and renamed to match the links (e.g., `003_overlay.png`).
+3.  **`requirements.txt`**: Create this file and add:
+    ```text
+    torch
+    torchvision
+    numpy
+    opencv-python
+    matplotlib
+    scipy
+    ```
+
+**Is there any specific data or license information you want to add before you push this to GitHub?**
+
+```
