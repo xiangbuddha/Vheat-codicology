@@ -3,7 +3,7 @@
 
 ---
 
-## 📜 Abstract
+## Abstract
 This study investigates the materiality of 19th-century Vietnamese Yao (Lanten) religious manuscripts using the **vHeat** unsupervised vision model. By applying a heat-conduction metaphor to document analysis, we visualize and quantify material traces such as ink bleed-through, paper wear, and ritual-induced stains.
 
 ---
@@ -11,62 +11,50 @@ This study investigates the materiality of 19th-century Vietnamese Yao (Lanten) 
 ## 1. Introduction: The Materiality of Yao Manuscripts
 Within the religious networks of the East and Southeast Asian highlands, the manuscripts of the **Indigo Yao (Kim Mun / Lanten)** function as more than doctrinal carriers; they are the material foundation of a mobile transregional network. 
 
-As noted by Jacob Cawthorne, these texts represent an **"active literacy"** [^1], where manuscripts are continually copied, carried, and reinterpreted during ritual practice and migration [^2]. Consequently, physical traces like paper wear and stains are historical evidence of equal importance to the written content.
+As noted by Jacob Cawthorne, these texts represent an **"active literacy"**, where manuscripts are continually copied, carried, and reinterpreted during ritual practice and migration. Consequently, physical traces like paper wear and stains are historical evidence of equal importance to the written content.
 
 ---
 
 ## 2. Methodology: vHeat as a Codicological Tool
-We introduce **vHeat** (accepted at CVPR 2025) as a low-cost, high-throughput approach to computational codicology [^4].
+We introduce **vHeat** (accepted at CVPR 2025) as a low-cost, high-throughput approach to computational codicology.
 
-### Why Heat Conduction?
-The physical metaphor of heat diffusion shares clear mathematical similarities with:
-* **Capillary Penetration**: How ink moves through porous paper.
-* **Biological Spread**: The formation of mold and aging stains.
-* **Material Interaction**: Modeling correlations across a planar surface efficiently.
+### The Physical Metaphor
+The design of vHeat is inspired by principles of heat conduction. In a codicological context, this offers strong interpretive potential:
+* **Ink Penetration**: The diffusion of heat through a medium shares mathematical similarities with the capillary penetration of ink into porous paper.
+* **Aging Stains**: The model approximates the spread of mold and the formation of aging stains by modeling pixels as sources of diffusion.
+* **Efficiency**: It achieves a global receptive field while maintaining computational efficiency, approximating natural interactions on a planar surface.
 
-### Visual Outputs
-For each page of the manuscript *Zhai duan (Wang) miyu*, we generate:
-1. **2D Feature Heatmap Overlay**: Precise localization of anomalies.
-2. **3D Anomaly Terrain Map**: Translating material variation into perceptible height fluctuations.
-
----
-
-## 3. Key Findings
-
-### A. The "U-Shaped" Wear Pattern
-Analysis across 94 pages reveals that anomaly area percentages display a pronounced **U-shaped pattern**. 
-* **Cover & End Pages**: Exhibit the highest wear due to handling and environmental exposure.
-* **Middle Section**: Remains comparatively stable.
-
-> **[INSERT IMAGE HERE]** > *Figure 1: Visual representation of the U-shaped anomaly distribution across the manuscript volume.*
-> `![Anomaly Distribution](./your_plot_name.png)`
-
-### B. Intentional Layout vs. Damage (Page 19)
-Page 19 showed the highest **Pattern Complexity** but low anomaly area. 
-* **Observation**: The 3D terrain map showed a highly regular frequency structure.
-* **Conclusion**: This was caused by **dense tabular lines and talismanic grids** (intentional design) rather than deterioration.
-
-> **[INSERT IMAGE HERE]** > *Figure 2: 3D Terrain Map of Page 19 showing regular talismanic structures.*
-> `![Page 19 Analysis](./page19_3d.png)`
-
-### C. Ink Properties & Ritual Use
-* **Stroke Edges**: Page 36 preserves sharper stroke edges compared to the homogenized background of Page 30, reflecting differences in ink concentration or brush movement.
-* **Ritual Stains**: Page 8 exhibits uneven distributions likely associated with grease stains or smudges from repeated handling during ritual performances.
+### Quantitative Metrics
+The study employs three key metrics across all ninety-four pages:
+1. **Mean Anomaly Index**: Overall intensity of material deviation.
+2. **Anomaly Area Percentage**: Total surface area affected by significant anomalies.
+3. **Pattern Complexity**: Statistical variation (Standard Deviation) of the heatmap, reflecting texture regularity.
 
 ---
 
-## 4. Conclusion & Limitations
-vHeat provides an accessible computational pathway for material studies, running efficiently on a **single consumer-grade GPU**. However, it may produce misinterpretations in cases of material heterogeneity caused by paper repairs. Thus, computational results must be interpreted in conjunction with specific codicological knowledge.
+## 3. Case Study Analysis: Zhai duan (Wang) miyu
+
+### A. Macro-level Distribution (The U-Shaped Pattern)
+At the scale of the entire volume, the distribution of anomaly area percentages displays a pronounced **U-shaped pattern**. 
+* **Opening and Closing Leaves**: Exhibit the highest anomaly percentages due to handling and humidity exposure.
+* **Inner Pages**: Pages 36, 30, and 24 exhibit high Mean Anomaly Index values but low Area Percentages (< 2%), confirming the manuscript’s overall loose paper fiber structure.
+
+### B. Intentional Layout vs. Degradation (Page 19)
+Page 19 presented a methodologically significant profile: the highest **Pattern Complexity** in the manuscript but a low Anomaly Area Percentage. 
+* **Findings**: The heat distribution followed a highly regular frequency structure.
+* **Interpretation**: Reference to the original image revealed dense tabular lines and talismanic grid structures, indicating that the model captures **deliberate layout design** rather than damage.
+
+### C. Stroke Edge and Ritual Use
+* **Stroke Sharpness**: Page 36 preserves sharper stroke edges (higher Pattern Complexity) compared to the homogenized background of Page 30.
+* **Ritual Handling**: Page 8 exhibits a distinctly uneven anomaly distribution, likely associated with grease stains or smudges left by repeated handling during ritual performance.
 
 ---
 
-## 📚 Bibliography
+## 4. Conclusion
+vHeat provides an accessible computational pathway for the material study of premodern books, running efficiently on a **single consumer-grade GPU**. While it lowers the threshold for computational codicology, results must always be interpreted in conjunction with specific codicological knowledge and material context.
+
+---
+
+## Bibliography
 * **Cawthorne, Jacob.** *Letters without Capitals: Text and Practice in Kim Mun (Yao) Culture.* BRILL, 2020.
-* **Wang, Zhaozhi, et al.** "Building Vision Models upon Heat Conduction." *ArXiv*, 2024. [https://doi.org/10.48550/arxiv.2405.16555](https://doi.org/10.48550/arxiv.2405.16555)
-
----
-
-## 📝 Footnotes
-[^1]: Jacob Cawthorne, *Letters without Capitals* (Leiden: Brill, 2021), 14–15.
-[^2]: Ibid., 137–138.
-[^4]: Zhaozhi Wang et al., "Building Vision Models upon Heat Conduction," *ArXiv* (2024).
+* **Wang, Zhaozhi, et al.** "Building Vision Models upon Heat Conduction." *Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)*, 2025.
