@@ -7,7 +7,7 @@ vHeat detects visual heterogeneity; it does not identify wear. All computational
 
 - **[Summary of results](./report.md)**
 - **[Scripts](./scripts/)**
-- **[Figures, maps of all 94 folios and folio index](./case-examples/)**
+- **[Figures, maps of all 94 folios and folio index](./case-examples/)** (scroll down on that page to see all 94 maps)
 - **[Cell scores](./data/)**
 
 ---
@@ -38,6 +38,8 @@ python extract_features.py --images /path/to/folio_images --vheat_repo /path/to/
 python score.py --feats feats.npz --out scores.npz --csv folio_scores.csv
 python make_maps.py --images /path/to/folio_images --scores scores.npz --out maps
 ```
+
+Both `extract_features.py` and `score.py` run on a CUDA GPU when one is available (`--device auto`, the default; install a CUDA build of PyTorch). Use `--device cpu` to reproduce the stored features and scores bit for bit: GPU arithmetic differs from CPU arithmetic in the last decimal places.
 
 Folio images are expected to be named `ZD_<n>.png`. The pipeline is deterministic: a complete rerun reproduces the stored features and cell scores exactly. The manuscript images themselves are not included in this repository.
 
