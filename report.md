@@ -38,4 +38,5 @@ The workflow uses computation to discipline scholarly attention while reserving 
 ## Files
 
 - `case-examples/figures/`: the three figures above and an overview of all ninety-four folios in folio order (`overview_all_folios.jpg`).
+- `case-examples/maps/`: a three-panel map for every folio (original scan, heat on a shared colour scale, cells above the manuscript-wide 99th percentile); see `case-examples/README.md`.
 - `case-examples/folio_index.csv`: score, rank, rank after red-removal, number of cells above the manuscript-wide 99th percentile, share of those cells near the excluded margin, and share of inked cells for every folio.
