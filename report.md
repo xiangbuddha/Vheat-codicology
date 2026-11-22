@@ -1,98 +1,41 @@
-# Computational Codicology via Thermal Diffusion
-## Visualizing Material Anomalies in Lanten Religious Manuscripts
+# Summary of results
 
----
+*Zhai duan miyu* 齋短秘語, a Kim Mun (Lanten) manuscript of the secret words: a cover and ninety-four main-text folios (ZD1–ZD94), thread-bound in the *tongzi ye* 筒子頁 format on thin paper with frequent show-through, purchased from an antiquarian bookseller in Hanoi. Each folio was captured with a flatbed scanner, so all images were acquired under the same lighting and geometric conditions.
 
-## Background
+For the specialist, a manuscript of the secret words functions as a ritual implement, picked up, opened, and worked with on each ritual occasion. Because a *miyu* is assembled from rearrangeable, individually titled units and need not be recited in full in any single rite, the material condition of its pages is inherently uneven. Visual inspection is selective: it is drawn to red seals, dense writing, and sections already expected to matter. To determine which parts of a manuscript were most often drawn upon, every folio must be surveyed on the same terms. The screening pipeline in this repository does that; the high-scoring regions are then examined codicologically.
 
-Within the religious networks of the East and Southeast Asian highlands, the religious manuscripts of the Indigo Yao (Kim Mun / Lanten) function not only as carriers of doctrinal and ritual knowledge, but also as the material foundation of a cultural network that transcends the boundaries of modern nation-states. As Jacob Cawthorne has noted, such textual practices gave rise to an “active literacy” distributed across the frontier highlands of southern China, northern Vietnam, and northwestern Laos.
+## Full-manuscript distribution
 
-This form of literacy is not characterized by the static transmission of a fixed canon, but rather by a dynamic textual life cycle in which manuscripts are continually copied, carried, and reinterpreted in the course of migration, ritual practice, and everyday use. Its historical roots can be traced to a manuscript culture shaped by Daoist textual and ritual traditions since the Tang and Song periods. In the context of sustained Indigo Yao migrations from the late nineteenth to the early twentieth century, this tradition developed into a highly mobile, transregional textual network.
+![Figure 1](./case-examples/figures/figure1_folio_scores.png)
 
-Consequently, the material features of Yao religious manuscripts, including paper wear, ink bleed-through, and stains left by repeated handling, are not ancillary to textual meaning, but constitute historical evidence of equal importance to the written content itself.
+*Figure 1. Folio scores for ZD1 to ZD94 in folio order; seven of the ten highest (blue) fall in the shaded outer leaves.*
 
----
+- Scores fall with distance from the two ends of the manuscript (Spearman ρ = −0.40, p < 0.001). The ten highest-scoring folios are ZD94, ZD2, ZD93, ZD91, ZD89, ZD92, ZD1, ZD77, ZD78 and ZD67. No folio between ZD3 and ZD65 reaches the top ten, and most folios remain largely quiet: half carry thirteen or fewer cells above the manuscript-wide 99th percentile.
+- The outer folios carry less writing (ρ = 0.40), yet the gradient persists when only blank-paper cells (ρ = −0.40) or only written cells (ρ = −0.40) are scored, and after the density of writing is controlled (partial ρ = −0.30).
+- After red-removal, nine of the ten candidates remain in the top ten and the gradient persists (ρ = −0.34). Across variations of reference, percentile, and seed, the same seven outer folios stay in the top ten.
+- A paper-tone measure, which registers overall darkening rather than localized concentration, points to only one end: eight of its ten darkest folios lie between ZD80 and ZD94, while ZD2 and ZD1, second and seventh in the screening, rank 50th and 60th in tone.
 
-## Research Problem
+## The outer leaves
 
-Despite this, existing digital humanities research on religious manuscripts has largely focused on transcription, annotation, and semantic analysis, while paying relatively little attention to traces of use and material pathology. Although physicochemical methods such as multispectral imaging have been widely adopted in the study of premodern books, their high equipment costs and technical demands make them difficult to apply at scale to large corpora of vernacular manuscripts or field-collected materials with uneven preservation conditions.
+![Figure 2](./case-examples/figures/figure2_ZD2_ZD94_ZD19.png)
 
-This situation raises a key methodological question: how can the materiality of religious manuscripts be studied systematically through approaches that are both lower in cost and higher in throughput?
+*Figure 2. Cells above the manuscript-wide 99th percentile (blue) on ZD2, ZD94, and ZD19 (median score); dashed line, excluded margin.*
 
----
+The edges of this manuscript are generally aged and soiled, a condition that reflects its mode of storage: the secret words were folded, rolled up, and wrapped in a cloth cover. In such a codex, the first and last leaves lie closest to the wrapping and are most exposed to folding, rolling, and damp. On ZD2 and ZD94, the high-scoring cells follow water stains and creases rather than particular characters. The concentration of anomalies at the two ends is consistent with this history of storage; it records damage to the codex as an object, not the use of particular units. Some of it may have occurred after the manuscript passed out of the hands of its original owner.
 
-## Case Study and Method
+Of the other three candidates, ZD67, within the unit 道士辰時專延生幡撥糧之法, enters the top ten in only two of seven variants; ZD77 and ZD78 remain in all seven, but ZD78 falls just outside the top ten after red-removal. On ZD67 and ZD77, half or more of the high-scoring cells lie near the excluded margin. I record them without making any determination about use. From around ZD80 onward, the handwriting also becomes progressively more cursive.
 
-Against this background, the present study takes a 19th century Vietnamese Yao religious manuscript, *Zhai duan (Wang) miyu* 齋短（亡）秘語, as its case study and introduces the unsupervised computer vision model **vHeat** as a low-cost, high-throughput approach to computational codicology.
+## Screening as systematic review
 
-The aim is to employ unsupervised visual analysis to transform material traces that are difficult to compare systematically by eye into data that are quantifiable and visualizable, thereby providing new forms of evidence for understanding manuscript production techniques, patterns of use, and ritual practice.
+![Figure 3](./case-examples/figures/figure3_ZD63_ZD51.png)
 
-vHeat is a visual backbone network accepted at CVPR 2025, and its design is inspired by principles of heat conduction. In a codicological context, this physical metaphor offers strong interpretive potential, since the diffusion of heat through a medium shares clear mathematical similarities with the capillary penetration of ink into porous paper, the spread of mold, and the formation of aging stains.
+*Figure 3. Details of ZD63 and ZD51, marked as in Figure 2.*
 
-By treating pixels or local image regions as sources of diffusion and modeling their correlations accordingly, vHeat achieves a global receptive field while maintaining computational efficiency, thus approximating the natural interactions of material processes on a planar surface.
+Beyond the outer leaves, the folio-by-folio visualizations direct attention to passages concealed with red pigment on ZD63, where a red line runs through 鄧經廉, and to a correction at the far left of ZD51.
 
----
+The workflow uses computation to discipline scholarly attention while reserving causal judgment for material examination. The model does not make the leaves speak. It disciplines the conditions under which their marks can be read.
 
-## Technical Framework
+## Files
 
-From a technical perspective, vHeat employs a frequency-domain mapping based on the Discrete Cosine Transform, which makes the model highly sensitive to texture density, edge gradients, and high-frequency noise. Learnable parameters are used to regulate the range of diffusion, thereby simulating, at a numerical level, the temporal scale or conductivity terms in the heat conduction equation.
-
-For each page of *Zhai duan (Wang) miyu*, the study generates two types of visual output:
-
-- Two-dimensional feature heatmap overlays  
-- Three-dimensional anomaly terrain maps  
-
-The former enables precise localization of anomalous regions, while the latter translates material variation into visually perceptible height fluctuations.
-
----
-
-## Quantitative Analysis
-
-Building on these outputs, the study employs three metrics:
-
-- **Mean Anomaly Index**
-- **Anomaly Area Percentage**
-- **Pattern Complexity**
-
-These metrics are used to conduct macro-level statistical and comparative analysis across all ninety-four pages of the manuscript.
-
-The results show that many inner pages, including pages 36, 30, and 24, consistently exhibit relatively high Mean Anomaly Index values while maintaining Anomaly Area Percentages below 2 percent. This pattern quantitatively confirms the manuscript’s overall material characteristics of loose paper fiber structure and high ink permeability.
-
-At the scale of the entire volume, the distribution of anomaly area percentages displays a pronounced U-shaped pattern. The cover page exhibits the highest anomaly area percentage, followed by several pages near the end of the manuscript, while the middle sections remain comparatively stable. This distribution closely corresponds to long-standing observations in book history regarding the concentration of handling, humidity exposure, and wear on the opening and closing leaves.
-
----
-
-## Interpretation
-
-Comparative analysis across individual pages further demonstrates that detected anomalies do not necessarily indicate physical damage. Page 19 presents a methodologically significant anomaly profile, with the highest Pattern Complexity value in the manuscript but a relatively low Anomaly Area Percentage.
-
-Examination of the three-dimensional terrain map shows that the heat distribution on this page follows a highly regular frequency structure rather than random, dispersed peaks. Reference to the original image reveals dense tabular lines and talismanic grid structures, indicating that the detected anomalies result from deliberate layout design rather than deterioration.
-
-This finding demonstrates that vHeat is capable of capturing the regular textures produced by intentional writing and layout practices, and it suggests a new feature dimension for the future identification of non-textual elements in premodern books.
-
----
-
-## Ink Properties and Ritual Use
-
-The model also reveals subtle differences in the physical properties of ink across pages. Pages 36 and 30 are both densely written on both sides and display similar Mean Anomaly Index values, yet page 36 shows a markedly higher Pattern Complexity.
-
-The three-dimensional terrain maps indicate that page 36 preserves sharper stroke edges, producing stronger frequency-domain interference, whereas the background intensity of page 30 appears more homogenized. These differences may reflect variations in ink concentration, brush movement, or the degree of paper aging.
-
-At the level of ritual use, page 8 exhibits a distinctly uneven anomaly distribution, with highlighted regions that are likely associated with grease stains or smudges left by repeated handling during ritual performance.
-
----
-
-## Conclusion and Limitations
-
-Overall, this study demonstrates that vHeat provides an accessible computational pathway for the material study of premodern books and religious manuscripts. The model runs efficiently on a single consumer-grade GPU and significantly lowers both computational and equipment thresholds, enabling computational codicology to extend beyond a small number of well-funded laboratory environments.
-
-At the same time, the approach has clear limitations. In cases involving material heterogeneity caused by paper repairs or re-mounting, which are common in late Qing manuscripts, the model may produce misinterpretations. For this reason, computational results must always be interpreted in conjunction with the specific material context and codicological knowledge of the manuscript, rather than being treated as self-sufficient evidence independent of the object itself.
-
----
-
-## Bibliography
-
-- Cawthorne, Jacob. *Letters without Capitals: Text and Practice in Kim Mun (Yao) Culture*. BRILL, 2020.
-- Wang, Zhaozhi, Yue Liu, Yunfan Liu, Hongtian Yu, Yaowei Wang, Qixiang Ye, and Yunjie Tian. “Building Vision Models upon Heat Conduction.” *ArXiv* (Cornell University), May 26, 2024. https://doi.org/10.48550/arxiv.2405.16555
-
-
+- `case-examples/figures/`: the three figures above and an overview of all ninety-four folios in folio order (`overview_all_folios.jpg`).
+- `case-examples/folio_index.csv`: score, rank, rank after red-removal, number of cells above the manuscript-wide 99th percentile, share of those cells near the excluded margin, and share of inked cells for every folio.
