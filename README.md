@@ -76,3 +76,7 @@ The cell scoring follows the nearest-neighbour approach of PatchCore: Roth, Kars
 ## Citation
 
 Wei, Xiang. "Computational Codicology via Thermal Diffusion: Visualizing Material Anomalies in Lanten Religious Manuscripts." Short paper submitted to DH2027, Galway. Code: https://github.com/xiangbuddha/Vheat-codicology
+
+## License
+
+The code in this repository is released under the [MIT License](./LICENSE). The manuscript images shown in the figures belong to the author's collection and are not covered by this license.
