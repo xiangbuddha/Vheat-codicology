@@ -13,7 +13,8 @@ _args=_ap.parse_args()
 IMG=_args.images; OUT=_args.out
 os.makedirs(OUT,exist_ok=True)
 plt.rcParams.update({'font.family':'serif','font.serif':['Liberation Serif','DejaVu Serif'],'font.size':10})
-_s=np.load(_args.scores); _d=np.load(_args.scores_dered if _args.scores_dered else _args.scores)
+HAS_DERED=_args.scores_dered is not None
+_s=np.load(_args.scores); _d=np.load(_args.scores_dered if HAS_DERED else _args.scores)
 s={k:_s[k] for k in _s.files}; d={k:_d[k] for k in _d.files}; pages=sorted(int(k) for k in s)
 R,C=84,56; mr,mc=5,3                       # 6% margin = 5 rows top/bottom, 3 columns left/right
 grid=lambda z,p: z[str(p)].reshape(R,C)
@@ -54,11 +55,12 @@ def render(p):
         if im is not rgb: ax.add_patch(plt.Rectangle((x0,y0),W-2*x0,H-2*y0,fill=False,ls='--',lw=0.8,ec='0.25'))
     sm=plt.cm.ScalarMappable(norm=Normalize(LO,HI),cmap=cmap); cb=fig.colorbar(sm,ax=axs[1],orientation='horizontal',fraction=0.04,pad=0.02,shrink=0.85)
     cb.set_label('cell score (colour scale shared by all folios: manuscript p95 to p99.9; lighter cells not shown)',fontsize=8); cb.ax.tick_params(labelsize=7)
-    fig.suptitle(f'ZD{p}   score {score[p]:.4f}   rank {rk[p]}/94   de-red rank {drk[p]}/94   cells > p99: {ntop}   ink share {ink*100:.1f}%',fontsize=12,y=0.99)
+    dr=f'   de-red rank {drk[p]}/{len(pages)}' if HAS_DERED else ''
+    fig.suptitle(f'ZD{p}   score {score[p]:.4f}   rank {rk[p]}/{len(pages)}{dr}   cells > p99: {ntop}   ink share {ink*100:.1f}%',fontsize=12,y=0.99)
     fig.savefig(os.path.join(OUT,f'ZD_{p:02d}.jpg'),dpi=250,bbox_inches='tight',pil_kwargs={'quality':85}); plt.close(fig)
     # thumbnail for the overview sheet
     tw=220; th=int(round(tw*H/W)); thumb=cv2.resize(outl,(tw,th),interpolation=cv2.INTER_AREA)
-    return dict(folio=p,score=round(float(score[p]),4),rank=rk[p],dered_score=round(float(dscore[p]),4),dered_rank=drk[p],
+    return dict(folio=p,score=round(float(score[p]),4),rank=rk[p],dered_score=(round(float(dscore[p]),4) if HAS_DERED else ''),dered_rank=(drk[p] if HAS_DERED else ''),
                 cells_above_p99=ntop,share_near_margin=(round(nb,2) if ntop else ''),ink_share_pct=round(ink*100,1),
                 outer_nine=('yes' if (p<=9 or p>=86) else 'no')),thumb
 if __name__=='__main__':
