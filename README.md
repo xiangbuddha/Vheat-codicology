@@ -8,6 +8,7 @@ vHeat detects visual heterogeneity; it does not identify wear. All computational
 - **[Summary of results](./report.md)**
 - **[Scripts](./scripts/)**
 - **[Figures, maps of all 94 folios and folio index](./case-examples/)**
+- **[Cell scores](./data/)**
 
 ---
 
