@@ -30,6 +30,7 @@ def ink_share(bgr):
     b=cv2.resize(bgr,(896,1344),interpolation=cv2.INTER_AREA); L=cv2.cvtColor(b,cv2.COLOR_BGR2LAB)[...,0]
     bg=cv2.medianBlur(cv2.morphologyEx(L,cv2.MORPH_CLOSE,cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(9,9))),21)
     m=((bg.astype(int)-L.astype(int))>25).astype(np.float32); return m.reshape(R,16,C,16).mean((1,3))[mr:R-mr,mc:C-mc].mean()
+CJK=['Noto Sans CJK SC','Microsoft YaHei','SimHei','PingFang SC','DejaVu Sans']   # panel titles are bilingual; first installed font is used
 cmap=plt.get_cmap('inferno_r')
 BLUE=(31/255,95/255,191/255)
 def render(p):
@@ -50,8 +51,8 @@ def render(p):
     nb=float(np.mean(np.minimum.reduce([ys,h-1-ys,xs,w-1-xs])<5)) if ntop else float('nan')
     ink=ink_share(bgr)
     fig,axs=plt.subplots(1,3,figsize=(15,7.6),gridspec_kw={'wspace':0.03})
-    for ax,im,t in zip(axs,[rgb,heat,outl],['original','heat (colour scale shared by all folios)','cells above the manuscript-wide 99th percentile']):
-        ax.imshow(im); ax.axis('off'); ax.set_title(t,fontsize=10)
+    for ax,im,t in zip(axs,[rgb,heat,outl],['原图 original','热力图（全书共用色标）heat, shared scale','高于全书第99百分位的单元格 cells > manuscript p99']):
+        ax.imshow(im); ax.axis('off'); ax.set_title(t,fontsize=10,fontfamily=CJK)
         if im is not rgb: ax.add_patch(plt.Rectangle((x0,y0),W-2*x0,H-2*y0,fill=False,ls='--',lw=0.8,ec='0.25'))
     sm=plt.cm.ScalarMappable(norm=Normalize(LO,HI),cmap=cmap); cb=fig.colorbar(sm,ax=axs[1],orientation='horizontal',fraction=0.04,pad=0.02,shrink=0.85)
     cb.set_label('cell score (colour scale shared by all folios: manuscript p95 to p99.9; lighter cells not shown)',fontsize=8); cb.ax.tick_params(labelsize=7)
